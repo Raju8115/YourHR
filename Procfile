@@ -1,1 +1,1 @@
-web: gunicorn YourHR.wsgi
+web: gunicorn YourHR.wsgi --bind 0.0.0.0:80
