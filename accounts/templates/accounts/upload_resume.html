@@ -1,0 +1,51 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mx-auto p-6 max-w-xl">
+    <h2 class="text-2xl font-bold mb-4">Upload Resume</h2>
+
+    <!-- Display form errors -->
+    {% if form.errors %}
+        <div class="mb-4">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="bg-red-500 text-white p-3 rounded mb-2">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Upload form -->
+    <form method="POST" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        
+        <!-- Render all fields except file upload -->
+        {{ form.non_field_errors }}
+        {{ form.resume.errors }}
+
+        {% for field in form %}
+            {% if field.name != 'resume' %}
+                <div>
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                        <small class="text-gray-600">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Manually render the file upload input without the clear checkbox -->
+        <div>
+            <label for="id_resume" class="block text-gray-700">Resume:</label>
+            <input type="file" name="resume" id="id_resume" class="w-full text-gray-700">
+            {% if form.instance.resume %}
+                <p class="mt-2 text-sm">Current file: {{ form.instance.resume.name }}</p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full md:w-auto">Upload</button>
+    </form>
+</div>
+{% endblock %}

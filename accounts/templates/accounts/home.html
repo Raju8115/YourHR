@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="text-center mt-12">
+    <h1 class="text-4xl font-bold mb-4">Welcome to YourHR</h1>
+    
+    {% if user.is_authenticated %}
+        <p class="text-lg mb-6">Hello, <span class="font-semibold">{{ user.username }}</span>! You are logged in successfully.</p>
+        
+    {% else %}
+        <div class="space-x-4">
+            <a href="{% url 'register' %}" class="text-blue-500 hover:underline text-lg">Sign Up</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

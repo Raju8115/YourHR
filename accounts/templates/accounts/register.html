@@ -1,0 +1,44 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mx-auto p-6 max-w-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">Register</h2>
+    <form method="POST" enctype="multipart/form-data" class="space-y-4 border-gray-300 border-4 shadow-md rounded-lg p-4">
+        {% csrf_token %}
+        
+        <!-- User Information -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">User Information</h3>
+            {{ user_form.non_field_errors }}
+            
+            <div class="mb-4">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+                {{ user_form.username.errors }}
+            </div>
+            
+            <div class="mb-4">
+                {{ user_form.email.label_tag }}
+                {{ user_form.email }}
+                {{ user_form.email.errors }}
+            </div>
+            
+            <div class="mb-4">
+                {{ user_form.password1.label_tag }}
+                {{ user_form.password1 }}
+                {{ user_form.password1.errors }}
+            </div>
+            
+            <div class="mb-4">
+                {{ user_form.password2.label_tag }}
+                {{ user_form.password2 }}
+                {{ user_form.password2.errors }}
+            </div>
+        </div>
+        
+        <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600">
+            Register
+        </button>
+    </form>
+</div>
+{% endblock %}
